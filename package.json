@@ -1,0 +1,19 @@
+{
+  "name": "mortyparse",
+  "version": "1.0.0",
+  "description": "Multipart/form-data parser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Multipart",
+    "form-data",
+    "parser"
+  ],
+  "author": "Roberto Antelo",
+  "license": "ISC",
+  "dependencies": {
+    "buffer-split": "^1.0.0"
+  }
+}
