@@ -1,4 +1,6 @@
-let fs = require('fs');
+const fs = require('fs');
+const Morty = require('./index.js');
+
 
 //use OKTETA 
 fs.readFile('./multipart_in_base64.txt', (err, data) => {
@@ -7,4 +9,4 @@ fs.readFile('./multipart_in_base64.txt', (err, data) => {
   }
 
   console.log(data);
-};
+});

@@ -10,6 +10,7 @@ class Morty {
     let formdata = [];
     return bsplit(buff, this.boundary);
   }
+
 }
 
 module.exports = Morty;
