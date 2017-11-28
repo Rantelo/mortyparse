@@ -1,14 +1,22 @@
 const fs = require('fs');
 const Morty = require('./index.js');
 
-//use OKTETA 
+//use OKTETA for better reading
 fs.readFile('./multipart_in_base64.txt', (err, data) => {
   if (err) {
     throw err;
   }
 
-  //Fucking boundary not working
-  let morty = new Morty(Buffer('----WebKitFormBoundarycknRrYwHG15UXgO3'));
-  let parsed = morty.parse(data)
+  let b64_str = data.toString();
+  let buff = Buffer(b64_str, 'base64');
+  let boundary = Buffer('------WebKitFormBoundaryP3g0SzBdyJ5K6WeU');
+
+  const morty = new Morty(boundary);
+  const parsed = morty.parse(buff);
+
   console.log(parsed);
+
 });
+
+
+
