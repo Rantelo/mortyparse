@@ -3,8 +3,13 @@ const bsplit = require('buffer-split');
 
 const inBuffer = (buff, buffSearch) => buff.indexOf(buffSearch) > -1;
 
+const NotABuffer = () => new Error('Value is not a Buffer');
+
 class Morty {
   constructor(boundary) {
+    if (!(boundary instanceof Buffer)) {
+      throw NotABuffer();
+    }
     this.boundary = boundary;
   }
 
@@ -20,6 +25,9 @@ class Morty {
   }
 
   parse(buff) {
+    if (!(buff instanceof Buffer)) {
+      throw NotABuffer();
+    }
     let parts = bsplit(buff, this.boundary);
 
     let parsed = parts.map(e => {
