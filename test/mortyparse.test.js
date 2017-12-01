@@ -1,5 +1,6 @@
 const Morty = require('../index.js');
 const fs = require('fs');
+const b64_str = require('./multipartB64.js');
 //const fs = jest.mock('fs');
 
 describe('Testing constructor', () => {
@@ -20,20 +21,9 @@ describe('Testing constructor', () => {
 
 
 describe('Testing parser', () => {
-  let b64_str;
   let morty;
   beforeAll(() => {
-    morty = new Morty(Buffer("I'm a Morty"));
-    b64_str = fs.readFileSync('./multipartB64.txt');
-    //, (err, data) => {
-      // let buff = Buffer(b64_str, 'base64');
-      // let boundary = Buffer('------WebKitFormBoundaryP3g0SzBdyJ5K6WeU');
-
-      // const morty = new Morty(boundary);
-      // const parsed = morty.parse(buff);
-
-      // console.log(parsed);
-    //});
+    morty = new Morty(Buffer("------WebKitFormBoundaryaVKetDdeBHAjicUm"));
   });
 
   it('throws an error when the thing to be parsed is not a Buffer', () => {
@@ -45,8 +35,18 @@ describe('Testing parser', () => {
   });
 
   it('parses a multipart/data-form into an array', () => {
+    const expected = [
+      { name: 'cv', filename: 'testpdf.pdf', content_type: 'application/pdf' },
+      { name: 'name', data: 'Test Name' },
+      { name: 'email', data: 'test@email.com' },
+      { name: 'telephone', data: '0101010101' },
+      { name: 'vacant', data: 'Back-End' },
+      { name: 'reference', data: 'internet' },
+      { name: 'portfolio', data: 'No aplica' }
+    ]
     let parsed = morty.parse(Buffer(b64_str, 'base64'));
     expect.arrayContaining([{name: "name", data: "Test Name"}]);
+    expect(parsed.length).toBe(7);
   });
 });
 
