@@ -1,7 +1,5 @@
 const Morty = require('../index.js');
-const fs = require('fs');
 const b64_str = require('./multipartB64.js');
-//const fs = jest.mock('fs');
 
 describe('Testing constructor', () => {
   it('initializes Morty with boundary provided', () => {
