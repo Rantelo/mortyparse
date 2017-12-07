@@ -1,7 +1,6 @@
 # Mortyparse
-============
 
-parse a Buffer containing a multipart/data-form
+Parse a Buffer containing a multipart/data-form
 
 ### Usage
 
