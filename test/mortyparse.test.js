@@ -32,16 +32,12 @@ describe('Testing parser', () => {
     expect(parseANonBuffer).toThrow('Value is not a Buffer');
   });
 
+  it('match snapshot', () => {
+    let parsed = morty.parse(Buffer(b64_str, 'base64'));
+    expect(parsed).toMatchSnapshot();
+  });
+
   it('parses a multipart/data-form into an array', () => {
-    const expected = [
-      { name: 'cv', filename: 'testpdf.pdf', content_type: 'application/pdf' },
-      { name: 'name', data: 'Test Name' },
-      { name: 'email', data: 'test@email.com' },
-      { name: 'telephone', data: '0101010101' },
-      { name: 'vacant', data: 'Back-End' },
-      { name: 'reference', data: 'internet' },
-      { name: 'portfolio', data: 'No aplica' }
-    ]
     let parsed = morty.parse(Buffer(b64_str, 'base64'));
     expect.arrayContaining([{name: "name", data: "Test Name"}]);
     expect(parsed.length).toBe(7);
